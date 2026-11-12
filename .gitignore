@@ -1,9 +1,16 @@
-﻿.venv/
+.venv/
+venv/
 __pycache__/
+*.pyc
+
+# data — 255 MB, download it yourself (see README section 6)
+data/
 *.csv
+
+# large intermediates
 *.parquet
 *.npy
 *.npz
-data/
-outputs/figures/
-.DS_Store
+
+# generated artefacts (figures/ is committed on purpose)
+outputs/runs/

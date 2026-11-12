@@ -1,0 +1,918 @@
+{
+  "documents": 111108,
+  "vocabulary": 5000,
+  "coherence_sweep": [
+    {
+      "k": 5,
+      "coherence": 0.1283
+    },
+    {
+      "k": 8,
+      "coherence": 0.1458
+    },
+    {
+      "k": 10,
+      "coherence": 0.1514
+    },
+    {
+      "k": 12,
+      "coherence": 0.145
+    },
+    {
+      "k": 15,
+      "coherence": 0.1612
+    },
+    {
+      "k": 20,
+      "coherence": 0.1673
+    }
+  ],
+  "selected_k": 20,
+  "lda_topics": [
+    {
+      "id": 0,
+      "terms": [
+        "student_loan",
+        "navient",
+        "loan",
+        "school",
+        "pnc",
+        "program",
+        "student",
+        "plan",
+        "forbearance",
+        "pay_loan"
+      ],
+      "size": 4972
+    },
+    {
+      "id": 1,
+      "terms": [
+        "debt",
+        "debt_collection",
+        "debt_collector",
+        "collect_debt",
+        "attempt_collect",
+        "collector",
+        "collection_agency",
+        "original_creditor",
+        "collection",
+        "portfolio_recovery"
+      ],
+      "size": 6199
+    },
+    {
+      "id": 2,
+      "terms": [
+        "citibank",
+        "lease",
+        "bofa",
+        "damage",
+        "repair",
+        "apartment",
+        "rent",
+        "move",
+        "unit",
+        "city"
+      ],
+      "size": 2427
+    },
+    {
+      "id": 3,
+      "terms": [
+        "late_payment",
+        "car",
+        "vehicle",
+        "finance",
+        "payment",
+        "suntrust",
+        "dealership",
+        "miss_payment",
+        "santander",
+        "car_loan"
+      ],
+      "size": 2548
+    },
+    {
+      "id": 4,
+      "terms": [
+        "court",
+        "fraud",
+        "lawsuit",
+        "case",
+        "judgement",
+        "attorney",
+        "law_firm",
+        "judgment",
+        "sue",
+        "judge"
+      ],
+      "size": 2714
+    },
+    {
+      "id": 5,
+      "terms": [
+        "chase",
+        "trust",
+        "sps",
+        "note",
+        "borrower",
+        "bankruptcy",
+        "foreclosure",
+        "discharge",
+        "lien",
+        "trustee"
+      ],
+      "size": 3145
+    },
+    {
+      "id": 6,
+      "terms": [
+        "card",
+        "american_express",
+        "credit_card",
+        "citi",
+        "amex",
+        "debit_card",
+        "promotion",
+        "point",
+        "bonus",
+        "offer"
+      ],
+      "size": 4222
+    },
+    {
+      "id": 7,
+      "terms": [
+        "customer",
+        "practice",
+        "discover",
+        "limit",
+        "benefit",
+        "service",
+        "policy",
+        "base",
+        "rate",
+        "product"
+      ],
+      "size": 4429
+    },
+    {
+      "id": 8,
+      "terms": [
+        "bank_america",
+        "bank",
+        "america",
+        "check",
+        "deposit",
+        "boa",
+        "fund",
+        "money",
+        "branch",
+        "checking"
+      ],
+      "size": 6962
+    },
+    {
+      "id": 9,
+      "terms": [
+        "short_sale",
+        "appraisal",
+        "lender",
+        "refinance",
+        "buyer",
+        "home",
+        "mortgage",
+        "seller",
+        "closing",
+        "house"
+      ],
+      "size": 5495
+    },
+    {
+      "id": 10,
+      "terms": [
+        "wells_fargo",
+        "loan_modification",
+        "modification",
+        "fargo",
+        "sls",
+        "hsbc",
+        "foreclosure",
+        "homeowner",
+        "income",
+        "sale_date"
+      ],
+      "size": 4526
+    },
+    {
+      "id": 11,
+      "terms": [
+        "credit_report",
+        "report",
+        "score",
+        "report_credit",
+        "credit_score",
+        "remove_credit",
+        "credit_bureau",
+        "remove",
+        "credit_bureaus",
+        "credit"
+      ],
+      "size": 11310
+    },
+    {
+      "id": 12,
+      "terms": [
+        "escrow",
+        "mortgage_payment",
+        "payment",
+        "ditech",
+        "taxis",
+        "mortgage",
+        "monthly_payment",
+        "principal",
+        "payoff",
+        "insurance"
+      ],
+      "size": 5718
+    },
+    {
+      "id": 13,
+      "terms": [
+        "credit_report",
+        "credit_reporting",
+        "reporting_agency",
+        "dispute",
+        "report",
+        "equifax",
+        "fair_credit",
+        "credit_file",
+        "delete",
+        "experian"
+      ],
+      "size": 9124
+    },
+    {
+      "id": 14,
+      "terms": [
+        "credit_card",
+        "late_fee",
+        "charge",
+        "fee",
+        "balance",
+        "card",
+        "synchrony_bank",
+        "interest",
+        "purchase",
+        "pay"
+      ],
+      "size": 5283
+    },
+    {
+      "id": 15,
+      "terms": [
+        "help",
+        "paypal",
+        "get",
+        "green_tree",
+        "people",
+        "thing",
+        "think",
+        "want",
+        "say",
+        "money"
+      ],
+      "size": 6300
+    },
+    {
+      "id": 16,
+      "terms": [
+        "customer_service",
+        "tell",
+        "rep",
+        "hour",
+        "email",
+        "speak",
+        "supervisor",
+        "call",
+        "phone",
+        "representative"
+      ],
+      "size": 6401
+    },
+    {
+      "id": 17,
+      "terms": [
+        "ocwen",
+        "nationstar",
+        "letter",
+        "document",
+        "response",
+        "request",
+        "copy",
+        "nationstar_mortgage",
+        "send",
+        "provide"
+      ],
+      "size": 3107
+    },
+    {
+      "id": 18,
+      "terms": [
+        "social_security",
+        "capital",
+        "credit_card",
+        "usaa",
+        "identity_theft",
+        "number",
+        "personal_information",
+        "address",
+        "police_report",
+        "theft"
+      ],
+      "size": 5005
+    },
+    {
+      "id": 19,
+      "terms": [
+        "collection_agency",
+        "call",
+        "bill",
+        "phone_number",
+        "cell_phone",
+        "hospital",
+        "phone",
+        "contact",
+        "number",
+        "phone_call"
+      ],
+      "size": 11221
+    }
+  ],
+  "nmf_topics": [
+    {
+      "id": 0,
+      "terms": [
+        "customer_service",
+        "bank",
+        "money",
+        "check",
+        "card",
+        "charge",
+        "customer",
+        "deposit",
+        "transaction",
+        "purchase"
+      ]
+    },
+    {
+      "id": 1,
+      "terms": [
+        "credit_report",
+        "belong",
+        "hard_inquiry",
+        "trans_union",
+        "hard_inquiry credit_report",
+        "like_remove",
+        "need_remove",
+        "free_annual",
+        "consent",
+        "inquiry"
+      ]
+    },
+    {
+      "id": 2,
+      "terms": [
+        "debt",
+        "attempt_collect",
+        "collection",
+        "try_collect",
+        "debt_collector",
+        "owe",
+        "collect_debt",
+        "attempt_collect debt",
+        "pay_debt",
+        "collector"
+      ]
+    },
+    {
+      "id": 3,
+      "terms": [
+        "credit_card",
+        "card",
+        "capital",
+        "purchase",
+        "synchrony_bank",
+        "annual_fee",
+        "american_express",
+        "apply_credit",
+        "score",
+        "limit"
+      ]
+    },
+    {
+      "id": 4,
+      "terms": [
+        "report",
+        "remove_credit report",
+        "show_credit",
+        "report_credit report",
+        "item_credit",
+        "information_credit",
+        "pull_credit",
+        "collection_credit",
+        "check_credit",
+        "debt_credit"
+      ]
+    },
+    {
+      "id": 5,
+      "terms": [
+        "wells_fargo",
+        "fargo",
+        "home_mortgage",
+        "fargo_bank",
+        "wells_fargo home_mortgage",
+        "well_fargo",
+        "wells_fargo bank",
+        "call_wells",
+        "contact_wells",
+        "fargo_home"
+      ]
+    },
+    {
+      "id": 6,
+      "terms": [
+        "equifax",
+        "credit_file",
+        "dispute",
+        "credit_bureau",
+        "transunion",
+        "score",
+        "delete",
+        "experian",
+        "file",
+        "credit_score"
+      ]
+    },
+    {
+      "id": 7,
+      "terms": [
+        "bank_america",
+        "america",
+        "boa",
+        "bofa",
+        "call_bank",
+        "home_loan",
+        "contact_bank",
+        "america_credit",
+        "bank",
+        "overdraft_fee"
+      ]
+    },
+    {
+      "id": 8,
+      "terms": [
+        "mortgage",
+        "modification",
+        "loan_modification",
+        "home",
+        "short_sale",
+        "property",
+        "foreclosure",
+        "document",
+        "lender",
+        "house"
+      ]
+    },
+    {
+      "id": 9,
+      "terms": [
+        "pay",
+        "late_fee",
+        "payment",
+        "late_payment",
+        "fee",
+        "month",
+        "balance",
+        "charge_late",
+        "bill",
+        "owe"
+      ]
+    },
+    {
+      "id": 10,
+      "terms": [
+        "call",
+        "phone_number",
+        "cell_phone",
+        "phone_call",
+        "time_day",
+        "stop_call",
+        "leave_message",
+        "harass",
+        "phone",
+        "debt_collector"
+      ]
+    },
+    {
+      "id": 11,
+      "terms": [
+        "collection_agency",
+        "agency",
+        "bill",
+        "collection",
+        "original_creditor",
+        "send_collection",
+        "hospital",
+        "medical_bill",
+        "try_collect",
+        "owe"
+      ]
+    },
+    {
+      "id": 12,
+      "terms": [
+        "remove",
+        "report_need",
+        "refuse_remove",
+        "place",
+        "equifax_refuse",
+        "need_remove",
+        "tax_lien",
+        "removal",
+        "annual_fee",
+        "year_old"
+      ]
+    },
+    {
+      "id": 13,
+      "terms": [
+        "student_loan",
+        "loan",
+        "navient",
+        "school",
+        "interest_rate",
+        "pay_loan",
+        "private_loan",
+        "help",
+        "rate",
+        "student"
+      ]
+    },
+    {
+      "id": 14,
+      "terms": [
+        "report_credit",
+        "bureau",
+        "report_credit bureau",
+        "report_fail",
+        "provide_support",
+        "ask",
+        "bureaus",
+        "collect_debt",
+        "report_credit report",
+        "report_credit bureaus"
+      ]
+    },
+    {
+      "id": 15,
+      "terms": [
+        "thank",
+        "section_fcra",
+        "require_delete",
+        "information_verify",
+        "section_fcra require_delete",
+        "require_delete information_verify",
+        "ignore_request",
+        "file_verify",
+        "dispute_resolve",
+        "dispute_day"
+      ]
+    },
+    {
+      "id": 16,
+      "terms": [
+        "victim_identity",
+        "identity_theft",
+        "theft",
+        "victim_identity theft",
+        "police_report",
+        "belong",
+        "fraudulent",
+        "personal_information",
+        "send_letter",
+        "open"
+      ]
+    },
+    {
+      "id": 17,
+      "terms": [
+        "number",
+        "social_security",
+        "social_security number",
+        "security_number",
+        "driver_license",
+        "personal_information",
+        "address",
+        "information",
+        "phone_number",
+        "date_birth"
+      ]
+    },
+    {
+      "id": 18,
+      "terms": [
+        "remove_credit",
+        "remove_credit report",
+        "report_belong",
+        "year",
+        "file",
+        "trans_union",
+        "report_open",
+        "collection",
+        "report_year",
+        "pay_debt"
+      ]
+    },
+    {
+      "id": 19,
+      "terms": [
+        "fair_credit",
+        "debt_collection",
+        "reporting_act",
+        "fair_credit reporting_act",
+        "credit_reporting",
+        "practice_act",
+        "debt_collection practice_act",
+        "collection_practice",
+        "fair_debt",
+        "act"
+      ]
+    }
+  ],
+  "topic_agreement": {
+    "mean": 0.172,
+    "per_topic": [
+      0.429,
+      0.429,
+      0.053,
+      0.111,
+      0.053,
+      0.176,
+      0.053,
+      0.111,
+      0.176,
+      0.111,
+      0.111,
+      0.25,
+      0.176
+    ]
+  },
+  "topic_vs_product": [
+    {
+      "topic": 0,
+      "documents": 4972,
+      "top_label": "Student loan",
+      "share": 0.631
+    },
+    {
+      "topic": 1,
+      "documents": 6199,
+      "top_label": "Debt collection",
+      "share": 0.865
+    },
+    {
+      "topic": 2,
+      "documents": 2427,
+      "top_label": "Debt collection",
+      "share": 0.376
+    },
+    {
+      "topic": 3,
+      "documents": 2548,
+      "top_label": "Consumer Loan",
+      "share": 0.525
+    },
+    {
+      "topic": 4,
+      "documents": 2714,
+      "top_label": "Debt collection",
+      "share": 0.411
+    },
+    {
+      "topic": 5,
+      "documents": 3145,
+      "top_label": "Mortgage",
+      "share": 0.601
+    },
+    {
+      "topic": 6,
+      "documents": 4222,
+      "top_label": "Credit card",
+      "share": 0.534
+    },
+    {
+      "topic": 7,
+      "documents": 4429,
+      "top_label": "Credit card",
+      "share": 0.307
+    },
+    {
+      "topic": 8,
+      "documents": 6962,
+      "top_label": "Bank account or service",
+      "share": 0.699
+    },
+    {
+      "topic": 9,
+      "documents": 5495,
+      "top_label": "Mortgage",
+      "share": 0.873
+    },
+    {
+      "topic": 10,
+      "documents": 4526,
+      "top_label": "Mortgage",
+      "share": 0.91
+    },
+    {
+      "topic": 11,
+      "documents": 11310,
+      "top_label": "Credit reporting",
+      "share": 0.581
+    },
+    {
+      "topic": 12,
+      "documents": 5718,
+      "top_label": "Mortgage",
+      "share": 0.824
+    },
+    {
+      "topic": 13,
+      "documents": 9124,
+      "top_label": "Credit reporting",
+      "share": 0.68
+    },
+    {
+      "topic": 14,
+      "documents": 5283,
+      "top_label": "Credit card",
+      "share": 0.689
+    },
+    {
+      "topic": 15,
+      "documents": 6300,
+      "top_label": "Mortgage",
+      "share": 0.341
+    },
+    {
+      "topic": 16,
+      "documents": 6401,
+      "top_label": "Credit card",
+      "share": 0.209
+    },
+    {
+      "topic": 17,
+      "documents": 3107,
+      "top_label": "Mortgage",
+      "share": 0.573
+    },
+    {
+      "topic": 18,
+      "documents": 5005,
+      "top_label": "Credit reporting",
+      "share": 0.467
+    },
+    {
+      "topic": 19,
+      "documents": 11221,
+      "top_label": "Debt collection",
+      "share": 0.815
+    }
+  ],
+  "topic_vs_issue": [
+    {
+      "topic": 0,
+      "documents": 4972,
+      "top_label": "Dealing with my lender or servicer",
+      "share": 0.413
+    },
+    {
+      "topic": 1,
+      "documents": 6199,
+      "top_label": "Cont'd attempts collect debt not owed",
+      "share": 0.337
+    },
+    {
+      "topic": 2,
+      "documents": 2427,
+      "top_label": "Cont'd attempts collect debt not owed",
+      "share": 0.2
+    },
+    {
+      "topic": 3,
+      "documents": 2548,
+      "top_label": "Managing the loan or lease",
+      "share": 0.27
+    },
+    {
+      "topic": 4,
+      "documents": 2714,
+      "top_label": "Cont'd attempts collect debt not owed",
+      "share": 0.122
+    },
+    {
+      "topic": 5,
+      "documents": 3145,
+      "top_label": "Loan modification,collection,foreclosure",
+      "share": 0.274
+    },
+    {
+      "topic": 6,
+      "documents": 4222,
+      "top_label": "Account opening, closing, or management",
+      "share": 0.227
+    },
+    {
+      "topic": 7,
+      "documents": 4429,
+      "top_label": "Account opening, closing, or management",
+      "share": 0.11
+    },
+    {
+      "topic": 8,
+      "documents": 6962,
+      "top_label": "Deposits and withdrawals",
+      "share": 0.22
+    },
+    {
+      "topic": 9,
+      "documents": 5495,
+      "top_label": "Application, originator, mortgage broker",
+      "share": 0.272
+    },
+    {
+      "topic": 10,
+      "documents": 4526,
+      "top_label": "Loan modification,collection,foreclosure",
+      "share": 0.657
+    },
+    {
+      "topic": 11,
+      "documents": 11310,
+      "top_label": "Incorrect information on credit report",
+      "share": 0.427
+    },
+    {
+      "topic": 12,
+      "documents": 5718,
+      "top_label": "Loan servicing, payments, escrow account",
+      "share": 0.727
+    },
+    {
+      "topic": 13,
+      "documents": 9124,
+      "top_label": "Incorrect information on credit report",
+      "share": 0.449
+    },
+    {
+      "topic": 14,
+      "documents": 5283,
+      "top_label": "Billing disputes",
+      "share": 0.142
+    },
+    {
+      "topic": 15,
+      "documents": 6300,
+      "top_label": "Loan modification,collection,foreclosure",
+      "share": 0.162
+    },
+    {
+      "topic": 16,
+      "documents": 6401,
+      "top_label": "Loan servicing, payments, escrow account",
+      "share": 0.093
+    },
+    {
+      "topic": 17,
+      "documents": 3107,
+      "top_label": "Loan servicing, payments, escrow account",
+      "share": 0.341
+    },
+    {
+      "topic": 18,
+      "documents": 5005,
+      "top_label": "Incorrect information on credit report",
+      "share": 0.229
+    },
+    {
+      "topic": 19,
+      "documents": 11221,
+      "top_label": "Cont'd attempts collect debt not owed",
+      "share": 0.305
+    }
+  ],
+  "issue_count": 90
+}
