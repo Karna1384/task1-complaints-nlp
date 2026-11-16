@@ -3,6 +3,8 @@ Stage 3 -- Extract topics by two methods and validate them externally.
 
 Task 1, Project: Data Analysis (CSEBDSEDA02)
 
+Reads outputs/texts.parquet (written by vectorise.py).
+
 Methods:
   LDA  -- probabilistic mixture model on a bag-of-words matrix. The topic
           count is selected by a coherence sweep rather than assumed.
@@ -14,7 +16,10 @@ Validation:
   * Cross-check of each topic against the corpus's own Product and Issue
     labels, which no model has seen.
 
-Produces outputs/results_summary.json with every figure quoted in the report.
+Also folds in the vectorisation agreement score from `vectorisation.json`
+(stage 2) so that every figure quoted in the report sits in one file.
+
+Produces outputs/results_summary.json.
 
 Run:  python topics.py
 """
@@ -37,6 +42,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 OUT_DIR = Path(os.getenv("OUT_DIR", "outputs"))
 TEXTS = OUT_DIR / "texts.parquet"
+VECTORISATION = OUT_DIR / "vectorisation.json"
 
 TOPIC_CANDIDATES = [5, 8, 10, 12, 15, 20]
 N_TOP_WORDS = 10
@@ -113,6 +119,7 @@ def agreement(a: list[list[str]], b: list[list[str]], n: int = N_TOP_WORDS) -> d
         "mean": round(float(np.mean(scores)), 3) if scores else 0.0,
         "per_topic": scores,
         "matched": len(scores),
+        "unmatched": len(sa) - len(scores),
     }
 
 
@@ -136,6 +143,33 @@ def crosstab(df: pd.DataFrame, dominant: np.ndarray, label_col: str, k: int) -> 
     return rows
 
 
+def monotonic_note(sweep: list[dict]) -> dict:
+    """
+    Describe the shape of the sweep honestly.
+
+    The report must not claim the score rises at every step: it does not.
+    This records where it fell, so the README and the figure can be written
+    from the data rather than from an assumption.
+    """
+    ks = [d["k"] for d in sweep]
+    co = [d["coherence"] for d in sweep]
+    drops = [{"from_k": ks[i], "to_k": ks[i + 1],
+              "from": co[i], "to": co[i + 1],
+              "delta": round(co[i + 1] - co[i], 4)}
+             for i in range(len(co) - 1) if co[i + 1] < co[i]]
+    return {
+        "monotonic": len(drops) == 0,
+        "drops": drops,
+        "best_k": max(sweep, key=lambda x: x["coherence"])["k"],
+        "tested_range": [min(ks), max(ks)],
+        "note": (
+            "Coherence increases overall across the tested range"
+            + (f" but is not monotonic: it falls at k={drops[0]['to_k']}."
+               if drops else " and rises at every tested step.")
+        ),
+    }
+
+
 # ---------------------------------------------------------------------------
 
 def main() -> None:
@@ -143,8 +177,9 @@ def main() -> None:
         raise SystemExit(f"{TEXTS} not found. Run vectorise.py first.")
 
     df = pd.read_parquet(TEXTS)
-    texts = df["text_clean"].tolist()
-    print(f"Documents: {len(texts):,}")
+    text_col = "text_final" if "text_final" in df.columns else df.columns[0]
+    texts = df[text_col].tolist()
+    print(f"Documents: {len(texts):,}  (text column: {text_col})")
 
     vec = TfidfVectorizer(
         max_features=TFIDF_MAX_FEATURES, min_df=TFIDF_MIN_DF,
@@ -170,8 +205,10 @@ def main() -> None:
         sweep.append({"k": k, "coherence": round(s, 4)})
         print(f"  k={k:2d}  coherence={s:.4f}")
 
-    best_k = max(sweep, key=lambda x: x["coherence"])["k"]
+    shape = monotonic_note(sweep)
+    best_k = shape["best_k"]
     print(f"Selected k = {best_k}")
+    print(f"  {shape['note']}")
 
     # --- fit both models -------------------------------------------------
     lda = LatentDirichletAllocation(
@@ -190,10 +227,18 @@ def main() -> None:
     dominant = np.argmax(lda_doc, axis=1)
     freq = Counter(w for s in doc_sets for w in s)
 
+    # --- fold in the vectorisation agreement, so one file holds every figure
+    vectorisation = None
+    if VECTORISATION.exists():
+        vectorisation = json.loads(VECTORISATION.read_text())
+        print(f"\nVectorisation agreement: "
+              f"{(vectorisation.get('agreement') or {}).get('value')}")
+
     result = {
         "documents": int(len(df)),
         "vocabulary": int(len(features)),
         "coherence_sweep": sweep,
+        "coherence_shape": shape,
         "selected_k": best_k,
         "lda_topics": [
             {"id": i, "terms": t, "size": int((dominant == i).sum())}
@@ -205,13 +250,15 @@ def main() -> None:
         "topic_vs_issue": crosstab(df, dominant, "Issue", best_k),
         "top_terms_raw": [[w, c] for w, c in freq.most_common(20)],
         "issue_count": int(df["Issue"].nunique()) if "Issue" in df.columns else 0,
+        "vectorisation": vectorisation,
     }
 
     out = OUT_DIR / "results_summary.json"
     out.write_text(json.dumps(result, indent=2))
 
-    print(f"\nModel agreement: {result['topic_agreement']['mean']}")
-    print(f"\nLDA topics:")
+    print(f"\nModel agreement: {result['topic_agreement']['mean']} "
+          f"({result['topic_agreement']['matched']} matched)")
+    print("\nLDA topics:")
     for t in result["lda_topics"]:
         print(f"  T{t['id']:>2} ({t['size']:>6}): {', '.join(t['terms'])}")
     print(f"\nWrote {out}")

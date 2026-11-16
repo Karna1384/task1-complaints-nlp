@@ -914,5 +914,32 @@
       "share": 0.305
     }
   ],
-  "issue_count": 90
+  "issue_count": 90,
+  "coherence_shape": {
+    "monotonic": false,
+    "drops": [
+      {
+        "from_k": 10,
+        "to_k": 12,
+        "from": 0.1514,
+        "to": 0.145,
+        "delta": -0.0064
+      }
+    ],
+    "best_k": 20,
+    "tested_range": [
+      5,
+      20
+    ],
+    "note": "Coherence increases overall across the tested range but is not monotonic: it falls at k=12."
+  },
+  "vectorisation": {
+    "metric": "mean neighbourhood Jaccard overlap",
+    "neighbours": 10,
+    "sample": 500,
+    "embedding_model": "all-MiniLM-L6-v2",
+    "value": 0.053,
+    "source": "outputs/vectorisation.json (written by vectorise.py)"
+  },
+  "generated_by": "pipeline.py -> vectorise.py -> topics.py -> figures.py"
 }

@@ -73,15 +73,16 @@ Every figure quoted in the written report is written to
 
 ## 3. Figures
 
-The three figures below are generated from `outputs/results_summary.json` by
+The three figures below are generated from `results_summary.json` by
 `figures.py`. They are not drawn by hand and contain no estimated values.
 
 ### Coherence by number of topics
 
 ![Coherence by number of topics](figures/fig-coherence.png)
 
-Coherence rises with the topic count and never turns over. This is why 20 is
-reported as a lower bound rather than a discovered optimum (see §10).
+Coherence rises overall but is not monotonic — it dips at k=12 before resuming.
+Because it never turns over, 20 is reported as a lower bound rather than a
+discovered optimum (see §10).
 
 ### Topic concentration against product labels
 
@@ -120,9 +121,12 @@ python figures.py
 ├── topics.py                    stage 3 — coherence sweep, LDA, NMF, validation
 ├── figures.py                   stage 4 — draws the three figures above
 │
+├── results_summary.json         every figure quoted in the report
+├── vectorisation.json           the agreement score (written by vectorise.py)
+│
 ├── figures/                     output PNGs (committed)
 ├── data/                        the corpus goes here (NOT committed)
-└── outputs/                     artefacts and results_summary.json
+└── outputs/                     intermediate artefacts (tfidf, embeddings)
 ```
 
 The corpus is deliberately excluded. See §6 for where to get it.
@@ -146,6 +150,12 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
+
+`requirements.txt` covers all four stages: pandas, numpy, scikit-learn, scipy and
+pyarrow for the data work; **spaCy** for lemmatisation in stage 1;
+**sentence-transformers** for embeddings in stage 2 (this pulls in PyTorch, about
+2 GB — install everything and run `python vectorise.py --skip-embeddings` if you
+want the sparse pipeline only); and **matplotlib** for the figures in stage 4.
 
 ### Run
 
@@ -213,14 +223,19 @@ Four stages, run in order.
 
 | Stage | Script | What it does | Runtime |
 |---|---|---|---|
-| 1 | `pipeline.py` | Drops empty rows, deduplicates, cleans text, writes a parquet | 2–3 min |
+| 1 | `pipeline.py` | Drops empty rows, deduplicates, cleans, lemmatises, merges collocations | 20–25 min |
 | 2 | `vectorise.py` | Builds a TF-IDF matrix and sentence embeddings | ~25 min |
 | 3 | `topics.py` | Sweeps the topic count, fits LDA and NMF, validates against labels | ~10 min |
 | 4 | `figures.py` | Draws the figures from `results_summary.json` | seconds |
 
-**Stage 1 — cleaning.** Lowercases, strips URLs, removes the `XXXX` redaction
-placeholders the source uses for personal data, removes punctuation, and filters
-documents shorter than ten words.
+**Stage 1 — cleaning, lemmatisation and collocations.** Lowercases, strips
+URLs, removes the `XXXX` redaction placeholders the source uses for personal
+data, removes punctuation, and filters documents shorter than ten words. It then
+lemmatises with spaCy, keeping only nouns, proper nouns, verbs and adjectives,
+and finally merges frequent two-word phrases into single tokens — so
+`student` + `loan` becomes the token `student_loan` that appears in the topic
+term lists. That last step is scoped by a minimum document frequency of 20, and a
+candidate phrase is rejected when the whole phrase already exists as one token.
 
 **Stage 2 — representation.** Two views of the same corpus are built in
 parallel: a sparse TF-IDF matrix (5,000 features) and dense sentence embeddings
@@ -249,6 +264,8 @@ results:
 | `TFIDF_MAX_DF` | 0.5 | Terms in >50 % of documents are boilerplate, not topics |
 | `TOPIC_CANDIDATES` | 5–20 | The range swept for the topic count |
 | `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | 384-dim, fast enough on CPU for 111 k documents |
+| `BIGRAM_MIN_DOCS` | 20 | A two-word phrase becomes one token at this document frequency |
+| `KEEP_POS` | nouns, verbs, adjectives | Parts of speech kept during lemmatisation |
 | `SEED` | 42 | Fixed everywhere, so repeated runs are identical |
 
 ---
@@ -287,10 +304,13 @@ source text.
 
 Stated plainly, because a reader should not have to discover these.
 
-**Twenty topics is a lower bound, not an optimum.** The coherence curve rises
-monotonically to the largest value tested and never turns over. The honest
-reading is that the best topic count is at least twenty, and possibly higher.
-The figure in §3 shows this directly.
+**Twenty topics is a lower bound, not an optimum.** Coherence increases across
+the tested range from k=5 (0.128) to k=20 (0.167) but the curve is **not
+monotonic**: it dips at k=12 (0.145) after peaking at k=10 (0.151), then resumes
+rising. Because it never turns over, the honest reading is that the best topic
+count is at least twenty, and possibly higher — not that twenty is a discovered
+optimum. `coherence_shape.drops` in `results_summary.json` records the dip, and
+the figure in §3 plots the actual values.
 
 **Model agreement is low at 0.172.** LDA and NMF agree on only about a sixth of
 their topic vocabulary, and the figure covers 13 matched pairs out of 20 — seven

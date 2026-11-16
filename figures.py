@@ -47,8 +47,8 @@ ax.annotate("selected k = %d  (%.3f)" % (sel, co[i]),
 ax.set_xticks(ks)
 ax.set_xlabel("Number of topics (k)", fontsize=12)
 ax.set_ylabel("Topic coherence (NPMI)", fontsize=12)
-ax.set_title("Coherence keeps rising: k=%d is the largest value tested, "
-             "not a peak" % sel, fontsize=12.5, pad=10)
+ax.set_title("Coherence trends upward but is not monotonic: k=%d is the "
+             "largest value tested, not a peak" % sel, fontsize=11.5, pad=10)
 tidy(ax)
 fig.savefig(os.path.join(FIG_DIR, "fig-coherence.png"), dpi=200)
 plt.close(fig)
