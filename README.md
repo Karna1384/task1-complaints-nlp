@@ -37,33 +37,33 @@ that this can be measured.
 
 | | |
 |---|---|
-| Documents analysed | **111,108** |
+| Documents analysed | **111,004** |
 | Topics extracted | **20** |
 | Methods compared | LDA and NMF |
 | Representations compared | TF-IDF and sentence embeddings |
-| Strongest validation | 72.7 % of one topic's documents fall in a single human issue category |
+| Strongest validation | 53.1 % of one topic's documents fall in a single human issue category |
 
 ---
 
 ## 2. Results
 
-Run on 111,108 documents:
+Run on 111,004 documents:
 
 | Measure | Value | Reading |
 |---|---|---|
 | Selected topic count | 20 | Chosen by coherence sweep — see the caveat in §10 |
-| Best coherence (NPMI) | 0.1673 | Moderate; acceptable for real complaint text |
-| LDA / NMF agreement | 0.172 | Low — see §10 |
-| Vectorisation agreement | 0.053 | The two representations mostly disagree about similarity |
+| Best coherence (NPMI) | 0.1478 | Moderate; acceptable for real complaint text |
+| LDA / NMF agreement | 0.321 | Moderate — the two models share about a third of their vocabulary |
+| Vectorisation agreement | 0.025 | The two representations mostly disagree about similarity |
 | Topics above 80 % product concentration | 5 of 20 | Strong evidence of recovered structure |
-| Topics below 15 % issue concentration | 7 of 20 | Diffuse; general service themes, not distinct concerns |
+| Topics below 15 % issue concentration | 4 of 20 | Diffuse; general service themes, not distinct concerns |
 
 **The headline result.** Each topic's documents were cross-tabulated against the
-human `Product` and `Issue` labels. Topic 10 is 91 % Mortgage. Topic 9 is 87 %
-Mortgage. Topic 1 is 86.5 % Debt collection. Against the finer 90-category
-`Issue` field, topic 12 reaches 72.7 % on *"Loan servicing, payments, escrow
-account"* and topic 10 reaches 65.7 % on *"Loan modification, collection,
-foreclosure"*. Unsupervised topic modelling recovered a segmentation that human
+human `Product` and `Issue` labels. Topic 14 is 91.8 % Mortgage. Topic 15 is 86.4 %
+Mortgage. Topic 17 is 80.3 % Debt collection. Against the finer 90-category
+`Issue` field, topic 15 reaches 53.1 % on *"Loan modification, collection,
+foreclosure"* and topic 13 reaches 51.0 % on *"Incorrect information on credit
+report"*. Unsupervised topic modelling recovered a segmentation that human
 categorisers applied independently.
 
 Every figure quoted in the written report is written to
@@ -207,7 +207,7 @@ DATA_DIR=/path/to/folder python pipeline.py
 | Source file | 670,598 |
 | Rows carrying a published narrative | 114,704 |
 | After removing exact duplicates | 112,690 |
-| After dropping documents under 10 words | **111,108** |
+| After lemmatising and merging collocations | **111,004** |
 
 Only 17 % of the source file contains complaint text at all. A complaint is
 published only if the complainant consents, so roughly **83 % of the file is
@@ -305,18 +305,18 @@ source text.
 Stated plainly, because a reader should not have to discover these.
 
 **Twenty topics is a lower bound, not an optimum.** Coherence increases across
-the tested range from k=5 (0.128) to k=20 (0.167) but the curve is **not
-monotonic**: it dips at k=12 (0.145) after peaking at k=10 (0.151), then resumes
+the tested range from k=5 (0.1246) to k=20 (0.1478) but the curve is **not
+monotonic**: it dips at k=12 (0.1348) after reaching 0.1414 at k=10, then resumes
 rising. Because it never turns over, the honest reading is that the best topic
 count is at least twenty, and possibly higher — not that twenty is a discovered
 optimum. `coherence_shape.drops` in `results_summary.json` records the dip, and
 the figure in §3 plots the actual values.
 
-**Model agreement is low at 0.172.** LDA and NMF agree on only about a sixth of
+**Model agreement is moderate at 0.321.** LDA and NMF agree on about a third of
 their topic vocabulary, and the figure covers 13 matched pairs out of 20 — seven
 topics found no counterpart in the other model.
 
-**Seven topics are diffuse.** Concentrations below 15 % against their dominant
+**Four topics are diffuse.** Concentrations below 15 % against their dominant
 issue category mean those topics describe broad service themes rather than
 distinct concerns. The short bars in the product figure are those topics.
 
